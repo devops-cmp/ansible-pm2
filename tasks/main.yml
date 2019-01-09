@@ -1,0 +1,19 @@
+---
+# tasks file for pm2
+
+- name: Install pm2
+  npm:
+    name: pm2
+    global: yes
+  become: yes
+
+- name: Symlink into /usr/bin
+  file: >
+    src={{ node_home }}/lib/node_modules/pm2/bin/{{ item }}
+    dest=/usr/bin/{{ item }}
+    state=link
+  with_items:
+    - pm2
+
+- name: Init config command
+  shell: "PATH=$PATH:/usr/local/node/bin /usr/bin/pm2 startup systemd -u {{ app_user }} --hp {{ app_folder }} --service-name {{ app_name }}"

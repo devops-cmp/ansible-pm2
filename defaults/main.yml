@@ -1,0 +1,4 @@
+---
+# defaults file for pm2
+node_home: "/usr/local/node"
+instances: 0
