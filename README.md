@@ -18,7 +18,7 @@ There's no mandatory variable needed. If you need it you can specify where is lo
 Dependencies
 ------------
 
-This role depens on devops-cmp.ansible-nodejs.
+This role depens on devops_cmp.ansible_nodejs.
 
 Example Playbook
 ----------------
@@ -26,9 +26,9 @@ Example Playbook
 ```
     - hosts: servers
       roles:
-         - { role: devops-cmp.ansible-pm2}
+         - { role: devops_cmp.ansible_nodejs}
 ```
 License
 -------
 
-BSD
+MIT
