@@ -11,7 +11,7 @@
     name: pm2
     global: yes
   become: yes
-  when: pm2_exists.stat.exists == False
+  when: not pm2_exists.stat.exists
 
 - name: Symlink into /usr/bin
   file: >
@@ -20,8 +20,8 @@
     state=link
   with_items:
     - pm2
-  when: pm2_exists.stat.exists == False
+  when: not pm2_exists.stat.exists
 
 - name: Init config command
   shell: "PATH=$PATH:/usr/local/node/bin /usr/bin/pm2 startup systemd -u {{ app_user }} --hp {{ app_folder }} --service-name {{ app_name }}"
-  when: pm2_exists.stat.exists == False
+  when: not pm2_exists.stat.exists
