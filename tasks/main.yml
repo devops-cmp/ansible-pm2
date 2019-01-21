@@ -1,11 +1,17 @@
 ---
 # tasks file for pm2
 
+- name: check if pm2 exists
+  stat:
+    path: /usr/bin/pm2
+  register: pm2_exists
+
 - name: Install pm2
   npm:
     name: pm2
     global: yes
   become: yes
+  when: pm2_exists.stat.exists == False
 
 - name: Symlink into /usr/bin
   file: >
@@ -14,6 +20,8 @@
     state=link
   with_items:
     - pm2
+  when: pm2_exists.stat.exists == False
 
 - name: Init config command
   shell: "PATH=$PATH:/usr/local/node/bin /usr/bin/pm2 startup systemd -u {{ app_user }} --hp {{ app_folder }} --service-name {{ app_name }}"
+  when: pm2_exists.stat.exists == False
