@@ -2,7 +2,7 @@ galaxy_info:
   author: DevOps
   description: Install pm2
   company: CMProductions
-  license: license (GPLv2, CC-BY, etc)
+  license: BSD
   min_ansible_version: 2.4
 
   #
