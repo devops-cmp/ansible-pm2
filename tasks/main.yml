@@ -24,8 +24,6 @@
     state=link
   with_items:
     - pm2
-  when: not pm2_exists.stat.exists
 
 - name: Init config command
-  command: "PATH=$PATH:/usr/local/node/bin /usr/bin/pm2 startup systemd -u {{ app_user }} --hp {{ app_folder }} --service-name {{ app_name }}"
-  when: not pm2_exists.stat.exists
+  shell: "PATH=$PATH:/usr/local/node/bin /usr/bin/pm2 startup systemd -u {{ app_user }} --hp {{ app_folder }} --service-name {{ app_name }}"
