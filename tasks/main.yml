@@ -9,6 +9,7 @@
 - name: Install pm2
   npm:
     name: pm2
+    varsion: {{ pm2_version }}
     global: yes
   become: yes
   when: not pm2_exists.stat.exists
